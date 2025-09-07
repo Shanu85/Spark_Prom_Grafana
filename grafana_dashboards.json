@@ -1,0 +1,102 @@
+{
+  "id": null,
+  "uid": "kafka-dashboard",
+  "title": "Kafka Metrics Dashboard",
+  "tags": ["kafka", "prometheus", "jmx"],
+  "timezone": "",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Broker Network Throughput (Bytes In vs Out)",
+      "id": 1,
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "sum(rate(kafka_server_brokertopicmetrics_bytesin_total[1m]))", "refId": "A", "legendFormat": "Bytes In" },
+        { "expr": "sum(rate(kafka_server_brokertopicmetrics_bytesout_total[1m]))", "refId": "B", "legendFormat": "Bytes Out" }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Messages In Per Broker",
+      "id": 8,
+      "gridPos": { "x": 0, "y": 9, "w": 8, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "rate(kafka_server_brokertopicmetrics_messagesin_total[1m])", "refId": "A" }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Bytes In Per Broker",
+      "id": 9,
+      "gridPos": { "x": 8, "y": 9, "w": 8, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "rate(kafka_server_brokertopicmetrics_bytesin_total[1m])", "refId": "A" }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Bytes Out Per Broker",
+      "id": 10,
+      "gridPos": { "x": 16, "y": 9, "w": 8, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "rate(kafka_server_brokertopicmetrics_bytesout_total[1m])", "refId": "A" }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "CPU Usage",
+      "id": 11,
+      "gridPos": { "x": 0, "y": 15, "w": 12, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "rate(process_cpu_seconds_total[1m])", "refId": "A" }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Time spent in GC",
+      "id": 12,
+      "gridPos": { "x": 12, "y": 15, "w": 12, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "DS_PROMETHEUS" },
+      "lines": true,
+      "linewidth": 2,
+      "points": false,
+      "fill": 1,
+      "targets": [
+        { "expr": "rate(jvm_gc_collection_seconds_sum[1m])", "refId": "A" }
+      ]
+    }
+  ],
+  "templating": { "list": [] }
+}
