@@ -14,7 +14,7 @@ Kafka (Broker/Controller) produces logs, which are collected using **Log4J**.
 
 Application-level metrics are exported via the JMX Exporter, which converts Kafka’s JMX metrics into Prometheus-friendly formats.
 
-Metrics are scraped by **Prometheus** and visualized in **Grafana** dashboards.
+Metrics are scraped by **Prometheus** and visualized in **Grafana** dashboards (attached grafana_dashboards.json).
 
 Alerting is handled through **Alertmanager**, integrated with Prometheus.
 
@@ -26,6 +26,14 @@ Logs are shipped to **Elasticsearch** and visualized in **Kibana**.
 
 ## DFD
 <img width="2323" height="1564" alt="Untitled-2025-06-26-1114 excalidraw" src="https://github.com/user-attachments/assets/b65fb65b-2cc8-476b-bf1c-9005678b9181" />
+
+
+## Grafana Dashboard & RedPanda console
+
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/f63fc2ea-88f5-416e-a760-0cd3173afef7" width="500" height="1500" />
+  <img src="https://github.com/user-attachments/assets/4083407f-b1ca-4992-b32e-39833e742dc0" width="500" height="1500" />
+</p>
 
 
 ## Jar files for kafka Producer
