@@ -1,0 +1,60 @@
+# configuration file (tells Filebeat which log paths to watch, and where to send logs)
+# Each ./controller-logs-X and ./broker-logs-X is mounted inside Filebeat as a log directory.
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /opt/kafka/controller-logs_1/kafka.log
+      - /opt/kafka/controller-logs_2/kafka.log
+      - /opt/kafka/controller-logs_3/kafka.log
+      - /opt/kafka/broker-logs_1/kafka.log
+      - /opt/kafka/broker-logs_2/kafka.log
+      - /opt/kafka/broker-logs_3/kafka.log
+    multiline.pattern: '^\[' # if a line starts with [ (timestamp), it’s the start of a new log entry.
+    multiline.negate: true # lines that don’t start with [ belong to the previous entry.
+    multiline.match: after
+    fields:
+      log_type: kafka
+
+processors:
+  - dissect:
+      tokenizer: "[%{timestamp}] %{log_level} [%{raft_manager}] %{message}"
+      field: "message"
+      target_prefix: "parsed"
+      ignore_failure: true
+  - drop_fields:
+      fields: ["messages"]
+
+setup.template: # Ensures Elasticsearch has a template for indices created by Filebeat.
+  name: "kafka-logs-filebeat"
+  pattern: "kafka-logs-filebeat-*"
+  enabled: true
+
+output.elasticsearch:
+  hosts: ["es-container:9200"]
+  index: "kafka-logs-filebeat-%{+yyyy.MM.dd}" # Logs are stored in daily indices, e.g.: kafka-logs-filebeat-2025.08.30
+
+
+#flow_diagram
+#Kafka (log4j logs: kafka.log)
+#   │
+#   ▼
+#Filebeat
+#   ├─► Multiline parsing (stack traces grouped)
+#   ├─► Dissect (timestamp, log level, message)
+#   └─► Add log_type = kafka
+#   ▼
+#Elasticsearch (index: kafka-logs-filebeat-YYYY.MM.DD)
+#   ▼
+#Kibana / Grafana → Query & visualize Kafka logs
+
+
+
+
+
+
+
+
+
+
