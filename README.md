@@ -1,5 +1,29 @@
 # Spark_Prom_Grafana
 
+This project implements an end-to-end data pipeline with the following components:
+
+### Data Ingestion:
+A Java producer generates ~3B records/hour and publishes them to Kafka.
+
+### Stream Processing:
+We consume the Kafka data using PySpark Structured Streaming, perform aggregations, and push the processed data back into Kafka.
+
+### Metrics & Monitoring:
+
+Kafka (Broker/Controller) produces logs, which are collected using Log4J.
+
+Application-level metrics are exported via the JMX Exporter, which converts Kafka’s JMX metrics into Prometheus-friendly formats.
+
+Metrics are scraped by Prometheus and visualized in Grafana dashboards.
+
+Alerting is handled through Alertmanager, integrated with Prometheus.
+
+### Logging:
+
+Application and Kafka logs are collected using Filebeat.
+
+Logs are shipped to Elasticsearch and visualized in Kibana.
+
 ## DFD
 <img width="2323" height="1564" alt="Untitled-2025-06-26-1114 excalidraw" src="https://github.com/user-attachments/assets/b65fb65b-2cc8-476b-bf1c-9005678b9181" />
 
