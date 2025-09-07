@@ -1,0 +1,7 @@
+# Tells Grafana to automatically connect to your Prometheus container
+datasources:
+  - name: DS_PROMETHEUS
+    access: proxy
+    type: prometheus
+    url: http://prometheus:9090 # prometheus is container name
+    isDefault: true
