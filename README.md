@@ -31,8 +31,8 @@ Logs are shipped to **Elasticsearch** and visualized in **Kibana**.
 ## Grafana Dashboard & RedPanda console
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/f63fc2ea-88f5-416e-a760-0cd3173afef7" width="500" height="1500" />
-  <img src="https://github.com/user-attachments/assets/4083407f-b1ca-4992-b32e-39833e742dc0" width="500" height="1500" />
+  <img src="https://github.com/user-attachments/assets/f63fc2ea-88f5-416e-a760-0cd3173afef7" width="450" height="1500" />
+  <img src="https://github.com/user-attachments/assets/4083407f-b1ca-4992-b32e-39833e742dc0" width="450" height="1500" />
 </p>
 
 
